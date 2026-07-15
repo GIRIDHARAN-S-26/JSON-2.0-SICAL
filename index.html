@@ -39,7 +39,6 @@
             font-weight: bold;
             border-radius: 4px;
             margin-bottom: 25px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
         .location-selector-card {
@@ -55,9 +54,6 @@
             color: #333;
             font-size: 16px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            border-bottom: 2px solid #ccc;
-            padding-bottom: 5px;
         }
 
         .radio-group {
@@ -75,23 +71,15 @@
             padding: 10px 20px;
             border: 1px solid #ccc;
             border-radius: 4px;
-            transition: all 0.2s;
         }
 
         .radio-label input {
             margin-right: 10px;
-            transform: scale(1.2);
-        }
-
-        .radio-label:hover {
-            border-color: var(--primary);
-            background-color: #f1f7ff;
         }
 
         .radio-label.active {
             border-color: var(--primary);
             background-color: #e6f0ff;
-            box-shadow: 0 0 0 2px rgba(0,123,255,0.25);
         }
 
         fieldset {
@@ -100,18 +88,14 @@
             border-radius: 4px;
             padding: 20px;
             margin-bottom: 25px;
-            position: relative;
         }
 
         legend {
-            background: none;
             border: 2px solid #444;
             padding: 5px 15px;
             font-weight: bold;
             font-size: 18px;
             color: #111;
-            margin-left: 10px;
-            margin-bottom: 0;
         }
 
         .form-grid {
@@ -130,13 +114,10 @@
             font-size: 13px;
             font-weight: 500;
             margin-bottom: 4px;
-            color: #333;
         }
 
         .form-group label .required {
             color: var(--danger);
-            font-weight: bold;
-            margin-left: 2px;
         }
 
         .form-control {
@@ -148,17 +129,9 @@
             height: 34px;
         }
 
-        .form-control:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 2px rgba(0,123,255,0.25);
-        }
-
         .form-control[readonly] {
             background-color: #c8c8c8;
-            color: #333;
             cursor: not-allowed;
-            border-color: #999;
         }
 
         .dynamic-item {
@@ -179,12 +152,7 @@
             border: none;
             padding: 4px 8px;
             border-radius: 4px;
-            font-size: 12px;
             cursor: pointer;
-        }
-
-        .dynamic-item .remove-btn:hover {
-            background-color: #bd2130;
         }
 
         .action-btn {
@@ -197,11 +165,28 @@
             border-radius: 4px;
             cursor: pointer;
             margin-top: 10px;
-            transition: background 0.2s;
         }
 
-        .action-btn:hover {
-            background-color: var(--success-hover);
+        /* Styles for the inline fetch button grouping */
+        .inline-action-group {
+            display: flex;
+            gap: 5px;
+        }
+        
+        .fetch-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0 10px;
+            font-size: 12px;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            height: 34px;
+            white-space: nowrap;
+        }
+        .fetch-btn:hover {
+            background-color: var(--primary-hover);
         }
 
         .center-actions {
@@ -218,13 +203,6 @@
             font-weight: bold;
             border-radius: 4px;
             cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.15);
-            transition: all 0.2s;
-        }
-
-        .generate-btn:hover {
-            background-color: var(--success-hover);
-            transform: translateY(-1px);
         }
 
         .output-panel {
@@ -233,7 +211,6 @@
             padding: 20px;
             border-radius: 4px;
             margin-top: 25px;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
             display: none;
         }
 
@@ -246,41 +223,19 @@
             margin-bottom: 15px;
         }
 
-        .output-header h3 {
-            margin: 0;
-            font-size: 16px;
-            color: #a6e22e;
-        }
-
         .download-btn {
             background-color: var(--primary);
             color: white;
             border: none;
             padding: 6px 12px;
-            font-size: 13px;
-            font-weight: 600;
             border-radius: 4px;
             cursor: pointer;
         }
 
-        .download-btn:hover {
-            background-color: var(--primary-hover);
-        }
-
         pre {
             white-space: pre-wrap;
-            word-wrap: break-word;
-            font-family: "Courier New", Courier, monospace;
+            font-family: monospace;
             font-size: 13px;
-            max-height: 400px;
-            overflow-y: auto;
-        }
-
-        .filename-preview {
-            font-size: 12px;
-            color: #666;
-            margin-top: 5px;
-            font-style: italic;
         }
     </style>
 </head>
@@ -290,7 +245,6 @@
         JSON Utility-Stuffing
     </div>
 
-    <!-- Location Selector -->
     <div class="location-selector-card">
         <h3>Select CFS Location Profile</h3>
         <div class="radio-group">
@@ -307,7 +261,6 @@
     </div>
 
     <form id="stuffingForm">
-        <!-- Manifest Master / Message Head -->
         <fieldset>
             <legend>Manifest_Master/Message Head</legend>
             <div class="form-grid">
@@ -327,11 +280,11 @@
                 </div>
                 <div class="form-group">
                     <label>Job Number <span class="required">*</span></label>
-                    <input type="text" id="jobNumber" class="form-control" value="1003" required>
+                    <input type="text" id="jobNumber" class="form-control" value="1005" required>
                 </div>
                 <div class="form-group">
                     <label>Job Date <span class="required">*</span></label>
-                    <input type="date" id="jobDate" class="form-control" required>
+                    <input type="text" id="jobDate" class="form-control" placeholder="YYYYMMDD" required>
                 </div>
                 <div class="form-group">
                     <label>Reporting Event <span class="required">*</span></label>
@@ -342,9 +295,7 @@
                 </div>
                 <div class="form-group">
                     <label>Reporting party Type <span class="required">*</span></label>
-                    <select id="reportingPartyType" class="form-control" readonly required>
-                        <option value="C" selected>C - CUSTODIAN</option>
-                    </select>
+                    <input type="text" id="reportingPartyType" class="form-control" value="C" readonly required>
                 </div>
                 <div class="form-group">
                     <label>Reporting Party Code or Custodian Code <span class="required">*</span></label>
@@ -352,7 +303,7 @@
                 </div>
                 <div class="form-group">
                     <label>Reporting Location Name <span class="required">*</span></label>
-                    <input type="text" id="reportingLocationName" class="form-control" value="SICAL CFS" readonly required>
+                    <input type="text" id="reportingLocationName" class="form-control" value="SICALCFS" readonly required>
                 </div>
                 <div class="form-group">
                     <label>Reporting Location Code <span class="required">*</span></label>
@@ -365,7 +316,6 @@
             </div>
         </fieldset>
 
-        <!-- Cargo Container -->
         <fieldset>
             <legend>Cargo Container</legend>
             <div class="form-grid">
@@ -375,87 +325,60 @@
                 </div>
                 <div class="form-group">
                     <label>Container ID <span class="required">*</span></label>
-                    <input type="text" id="containerID" class="form-control" placeholder="e.g. MSKU1234567" required>
+                    <input type="text" id="containerID" class="form-control" required>
                 </div>
                 <div class="form-group">
                     <label>Equipment Type <span class="required">*</span></label>
                     <select id="equipmentType" class="form-control" required>
-                        <option value="">EQUIPMENT TYPE</option>
-                        <option value="CN" selected>CN - CONTAINER</option>
-                        <option value="CH">CH - CHASSIS</option>
+                        <option value="CN" selected>CN</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label>Equipment Size <span class="required">*</span></label>
-                    <input type="text" id="equipmentSize" class="form-control" placeholder="e.g. 20 / 40" required>
+                    <input type="text" id="equipmentSize" class="form-control" placeholder="20" required>
                 </div>
                 <div class="form-group">
                     <label>Equipment Load Status <span class="required">*</span></label>
-                    <select id="equipmentLoadStatus" class="form-control" required>
-                        <option value="">EQUIPMENT LOAD STATUS</option>
-                        <option value="F" selected>F - FULL</option>
-                        <option value="E">E - EMPTY</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Additional Equipment Hold</label>
-                    <input type="text" id="additionalEqHold" class="form-control">
+                    <input type="text" id="equipmentLoadStatus" class="form-control" value="FCL" required>
                 </div>
                 <div class="form-group">
                     <label>Final Destination Location <span class="required">*</span></label>
-                    <input type="text" id="finalDestLocation" class="form-control" placeholder="e.g. INNSA1" required>
+                    <input type="text" id="finalDestLocation" class="form-control" required>
                 </div>
                 <div class="form-group">
                     <label>Event Date <span class="required">*</span></label>
-                    <input type="text" id="eventDate" class="form-control" placeholder="E.G 20190912T23:10" required>
+                    <input type="text" id="eventDate" class="form-control" placeholder="YYYYMMDDTHH:MM" required>
                 </div>
                 <div class="form-group">
                     <label>Equipment Seal Type <span class="required">*</span></label>
-                    <select id="equipmentSealType" class="form-control" required>
-                        <option value="">EQUIPMENT SEAL TYPE</option>
-                        <option value="E" selected>E - CUSTOMS SEAL</option>
-                        <option value="W">W - WAREHOUSE SEAL</option>
-                    </select>
+                    <input type="text" id="equipmentSealType" class="form-control" value="ESEAL" required>
                 </div>
                 <div class="form-group">
                     <label>Equipment Seal Number <span class="required">*</span></label>
                     <input type="text" id="equipmentSealNumber" class="form-control" required>
                 </div>
                 <div class="form-group">
-                    <label>Other Equipment ID</label>
-                    <input type="text" id="otherEquipmentID" class="form-control">
-                </div>
-                <div class="form-group">
                     <label>Equipment Status <span class="required">*</span></label>
-                    <select id="equipmentStatus" class="form-control" required>
-                        <option value="">EQUIPMENT STATUS</option>
-                        <option value="A" selected>A - ACTIVE / LOADED</option>
-                    </select>
+                    <input type="text" id="equipmentStatus" class="form-control" value="94" required>
                 </div>
                 <div class="form-group">
-                    <label>Equipment Package</label>
-                    <input type="text" id="equipmentPackage" class="form-control">
+                    <label>Equipment Package <span class="required">*</span></label>
+                    <input type="text" id="equipmentPackage" class="form-control" value="PK" required>
                 </div>
                 <div class="form-group">
-                    <label>Equipment Quantity</label>
-                    <input type="number" id="equipmentQuantity" class="form-control">
+                    <label>Equipment Quantity <span class="required">*</span></label>
+                    <input type="number" id="equipmentQuantity" class="form-control" required>
                 </div>
                 <div class="form-group">
-                    <label>Equipment UQC</label>
-                    <select id="equipmentUQC" class="form-control">
-                        <option value="">SELECT EQUIPMENT UQC</option>
-                        <option value="KGS" selected>KGS - KILOGRAMS</option>
-                        <option value="TON">TON - TONNES</option>
-                    </select>
+                    <label>Equipment QUC <span class="required">*</span></label>
+                    <input type="text" id="equipmentQUC" class="form-control" value="PKG" required>
                 </div>
             </div>
         </fieldset>
 
-        <!-- Cargo Details -->
         <fieldset>
             <legend>Cargo Details</legend>
             <div id="cargoContainerList">
-                <!-- Initial Cargo Entry -->
                 <div class="dynamic-item" data-index="1">
                     <div class="form-grid">
                         <div class="form-group">
@@ -464,19 +387,15 @@
                         </div>
                         <div class="form-group">
                             <label>Document Type <span class="required">*</span></label>
-                            <select class="form-control cargo-doc-type" required>
-                                <option value="">DOCUMENT TYPE</option>
-                                <option value="SB" selected>SB - SHIPPING BILL</option>
-                                <option value="BOE">BOE - BILL OF ENTRY</option>
-                            </select>
+                            <input type="text" class="form-control cargo-doc-type" value="ESB" required>
                         </div>
                         <div class="form-group">
                             <label>Document Site <span class="required">*</span></label>
-                            <input type="text" class="form-control cargo-doc-site" placeholder="e.g. INMAA1" required>
+                            <input type="text" class="form-control cargo-doc-site" required>
                         </div>
                         <div class="form-group">
                             <label>Document Number <span class="required">*</span></label>
-                            <input type="text" class="form-control cargo-doc-num" required>
+                            <input type="number" class="form-control cargo-doc-num" required>
                         </div>
                         <div class="form-group">
                             <label>Document Date <span class="required">*</span></label>
@@ -484,41 +403,30 @@
                         </div>
                         <div class="form-group">
                             <label>Shipment Load Status <span class="required">*</span></label>
-                            <select class="form-control cargo-load-status" required>
-                                <option value="">SHIPMENT LOAD STATUS</option>
-                                <option value="F" selected>F - FULL LOAD</option>
-                                <option value="P">P - PARTIAL LOAD</option>
-                            </select>
+                            <input type="text" class="form-control cargo-load-status" value="F" required>
                         </div>
                         <div class="form-group">
                             <label>Package Type <span class="required">*</span></label>
-                            <select class="form-control cargo-pkg-type" required>
-                                <option value="">PACKAGE TYPE</option>
-                                <option value="BOX" selected>BOX</option>
-                                <option value="CRT">CRATE</option>
-                                <option value="BGS">BAGS</option>
-                                <option value="PCS">PIECES</option>
-                            </select>
+                            <input type="text" class="form-control cargo-pkg-type" value="P" required>
                         </div>
                         <div class="form-group">
                             <label>Quantity <span class="required">*</span></label>
                             <input type="number" class="form-control cargo-qty" required>
                         </div>
                         <div class="form-group">
-                            <label>Packets From</label>
-                            <input type="text" class="form-control cargo-pkts-from">
+                            <label>Packets From <span class="required">*</span></label>
+                            <input type="number" class="form-control cargo-pkts-from" value="1" required>
                         </div>
                         <div class="form-group">
-                            <label>Packets To</label>
-                            <input type="text" class="form-control cargo-pkts-to">
-                        </div>
-                        <div class="form-group">
-                            <label>Pack UQC</label>
-                            <input type="text" class="form-control cargo-uqc" placeholder="e.g. NOS">
+                            <label>Packets To <span class="required">*</span></label>
+                            <input type="number" class="form-control cargo-pkts-to" required>
                         </div>
                         <div class="form-group">
                             <label>MCIN/PCIN <span class="required">*</span></label>
-                            <input type="text" class="form-control cargo-pcin" placeholder="PCIN Number" required>
+                            <div class="inline-action-group">
+                                <input type="text" class="form-control cargo-pcin" style="flex-grow: 1;" required>
+                                <button type="button" class="fetch-btn" onclick="fetchRowCinNumber(this)">Fetch CIN</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -526,77 +434,49 @@
             <button type="button" class="action-btn" onclick="addCargoDetails()">Add New Cargo details</button>
         </fieldset>
 
-        <!-- Supporting Docs -->
-        <fieldset>
-            <legend>Supporting Docs</legend>
-            <div id="supportingDocList">
-                <!-- Dynamic Content Area -->
-            </div>
-            <button type="button" class="action-btn" onclick="addSupportingDoc()">Add New Doc</button>
-        </fieldset>
-
         <div class="center-actions">
             <button type="button" class="generate-btn" onclick="generateSCMTRJson()">Generate JSON</button>
-            <div class="filename-preview" id="filenamePreview"></div>
         </div>
     </form>
 
-    <!-- Output Section -->
     <div class="output-panel" id="outputPanel">
         <div class="output-header">
-            <h3 id="generatedFilename">F_CUCHE01_SF_..._DEC.json</h3>
+            <h3 id="generatedFilename">Filename preview</h3>
             <button class="download-btn" onclick="downloadJSONFile()">Download JSON File</button>
         </div>
         <pre id="jsonPreview"></pre>
     </div>
 
     <script>
-        // Configuration metadata mapping for locations
         const locationProfiles = {
             chennai: {
-                senderID: "ALSPD8726BCCD002",
-                portOfReporting: "INMAA1",
-                reportingLocationCode: "INMAA1",
-                authorisedPersonPan: "DERPS9790K"
+                senderID: "ALSPD8726BCCD002", portOfReporting: "INMAA1",
+                reportingLocationCode: "INMAA1SMR1", authorisedPersonPan: "DERPS9790K"
             },
             tuticorin: {
-                senderID: "ALSPD8726BCCD001",
-                portOfReporting: "INTUT1",
-                reportingLocationCode: "INTUT1",
-                authorisedPersonPan: "CGYPS5520H"
+                senderID: "ALSPD8726BCCD001", portOfReporting: "INTUT1",
+                reportingLocationCode: "INTUT1", authorisedPersonPan: "CGYPS5520H"
             },
             vizag: {
-                senderID: "INVTZ1SMR1",
-                portOfReporting: "INVTZ1",
-                reportingLocationCode: "INVTZ1",
-                authorisedPersonPan: "ALSPD8726B"
+                senderID: "INVTZ1SMR1", portOfReporting: "INVTZ1",
+                reportingLocationCode: "INVTZ1", authorisedPersonPan: "ALSPD8726B"
             }
         };
 
         let generatedJsonData = null;
         let generatedFilenameStr = "";
 
-        // Initialize defaults
         window.onload = function() {
-            // Set dynamic default date fields
             const today = new Date();
             const yyyy = today.getFullYear();
             const mm = String(today.getMonth() + 1).padStart(2, '0');
             const dd = String(today.getDate()).padStart(2, '0');
-            
-            document.getElementById('jobDate').value = `${yyyy}-${mm}-${dd}`;
-            
-            // Format Event date placeholder style: YYYYMMDDTHH:MM
-            const hh = String(today.getHours()).padStart(2, '0');
-            const min = String(today.getMinutes()).padStart(2, '0');
-            document.getElementById('eventDate').value = `${yyyy}${mm}${dd}T${hh}:${min}`;
-
-            // Sync structural parameters
+            document.getElementById('jobDate').value = `${yyyy}${mm}${dd}`;
+            document.getElementById('eventDate').value = `${yyyy}${mm}${dd}T15:25`;
             updateLocationProfile('chennai');
         };
 
         function updateLocationProfile(locKey) {
-            // Update UI Active states
             document.querySelectorAll('.radio-label').forEach(lbl => lbl.classList.remove('active'));
             document.getElementById(`lbl-${locKey}`).classList.add('active');
 
@@ -606,18 +486,13 @@
             document.getElementById('reportingLocationCode').value = profile.reportingLocationCode;
             document.getElementById('authorisedPersonPan').value = profile.authorisedPersonPan;
 
-            // Auto populate document site default for the first cargo row to speed up operations
-            const firstDocSite = document.querySelector('.cargo-doc-site');
-            if (firstDocSite) {
-                firstDocSite.value = profile.portOfReporting;
-            }
+            const dSite = document.querySelector('.cargo-doc-site');
+            if (dSite) dSite.value = profile.portOfReporting;
         }
 
         function addCargoDetails() {
             const container = document.getElementById('cargoContainerList');
-            const currentRows = container.getElementsByClassName('dynamic-item').length;
-            const nextIndex = currentRows + 1;
-
+            const nextIndex = container.getElementsByClassName('dynamic-item').length + 1;
             const targetSite = document.getElementById('portOfReporting').value;
 
             const html = `
@@ -630,11 +505,7 @@
                         </div>
                         <div class="form-group">
                             <label>Document Type <span class="required">*</span></label>
-                            <select class="form-control cargo-doc-type" required>
-                                <option value="">DOCUMENT TYPE</option>
-                                <option value="SB" selected>SB - SHIPPING BILL</option>
-                                <option value="BOE">BOE - BILL OF ENTRY</option>
-                            </select>
+                            <input type="text" class="form-control cargo-doc-type" value="ESB" required>
                         </div>
                         <div class="form-group">
                             <label>Document Site <span class="required">*</span></label>
@@ -642,7 +513,7 @@
                         </div>
                         <div class="form-group">
                             <label>Document Number <span class="required">*</span></label>
-                            <input type="text" class="form-control cargo-doc-num" required>
+                            <input type="number" class="form-control cargo-doc-num" required>
                         </div>
                         <div class="form-group">
                             <label>Document Date <span class="required">*</span></label>
@@ -650,45 +521,33 @@
                         </div>
                         <div class="form-group">
                             <label>Shipment Load Status <span class="required">*</span></label>
-                            <select class="form-control cargo-load-status" required>
-                                <option value="">SHIPMENT LOAD STATUS</option>
-                                <option value="F" selected>F - FULL LOAD</option>
-                                <option value="P">P - PARTIAL LOAD</option>
-                            </select>
+                            <input type="text" class="form-control cargo-load-status" value="F" required>
                         </div>
                         <div class="form-group">
                             <label>Package Type <span class="required">*</span></label>
-                            <select class="form-control cargo-pkg-type" required>
-                                <option value="">PACKAGE TYPE</option>
-                                <option value="BOX" selected>BOX</option>
-                                <option value="CRT">CRATE</option>
-                                <option value="BGS">BAGS</option>
-                                <option value="PCS">PIECES</option>
-                            </select>
+                            <input type="text" class="form-control cargo-pkg-type" value="P" required>
                         </div>
                         <div class="form-group">
                             <label>Quantity <span class="required">*</span></label>
                             <input type="number" class="form-control cargo-qty" required>
                         </div>
                         <div class="form-group">
-                            <label>Packets From</label>
-                            <input type="text" class="form-control cargo-pkts-from">
+                            <label>Packets From <span class="required">*</span></label>
+                            <input type="number" class="form-control cargo-pkts-from" value="1" required>
                         </div>
                         <div class="form-group">
-                            <label>Packets To</label>
-                            <input type="text" class="form-control cargo-pkts-to">
-                        </div>
-                        <div class="form-group">
-                            <label>Pack UQC</label>
-                            <input type="text" class="form-control cargo-uqc" placeholder="e.g. NOS">
+                            <label>Packets To <span class="required">*</span></label>
+                            <input type="number" class="form-control cargo-pkts-to" required>
                         </div>
                         <div class="form-group">
                             <label>MCIN/PCIN <span class="required">*</span></label>
-                            <input type="text" class="form-control cargo-pcin" placeholder="PCIN Number" required>
+                            <div class="inline-action-group">
+                                <input type="text" class="form-control cargo-pcin" style="flex-grow: 1;" required>
+                                <button type="button" class="fetch-btn" onclick="fetchRowCinNumber(this)">Fetch CIN</button>
+                            </div>
                         </div>
                     </div>
-                </div>
-            `;
+                </div>`;
             container.insertAdjacentHTML('beforeend', html);
         }
 
@@ -700,42 +559,43 @@
             }
         }
 
-        function addSupportingDoc() {
-            const container = document.getElementById('supportingDocList');
-            const currentRows = container.getElementsByClassName('dynamic-item').length;
-            const nextIndex = currentRows + 1;
+        // Automated function connected to your custom backend proxy
+        async function fetchRowCinNumber(buttonElement) {
+            // Locate the enclosing row elements contextually
+            const containerRow = buttonElement.closest('.dynamic-item');
+            
+            const portInput = containerRow.querySelector('.cargo-doc-site');
+            const sbInput = containerRow.querySelector('.cargo-doc-num');
+            const dateInput = containerRow.querySelector('.cargo-doc-date');
+            const pcinInput = containerRow.querySelector('.cargo-pcin');
 
-            const html = `
-                <div class="dynamic-item" data-index="${nextIndex}">
-                    <button type="button" class="remove-btn" onclick="this.parentElement.remove(); reindexDocs();">Remove</button>
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label>Doc Sequence No <span class="required">*</span></label>
-                            <input type="text" class="form-control doc-seq" value="${nextIndex}" readonly required>
-                        </div>
-                        <div class="form-group">
-                            <label>Doc Type Code <span class="required">*</span></label>
-                            <input type="text" class="form-control doc-type" placeholder="e.g. INV / COO" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Doc Reference Number <span class="required">*</span></label>
-                            <input type="text" class="form-control doc-ref" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Beneficiary Code</label>
-                            <input type="text" class="form-control doc-ben-code">
-                        </div>
-                    </div>
-                </div>
-            `;
-            container.insertAdjacentHTML('beforeend', html);
-        }
+            // Form validation checks
+            if(!portInput.value || !sbInput.value || !dateInput.value) {
+                alert("Please fill Document Site, Document Number, and Document Date first before fetching CIN.");
+                return;
+            }
 
-        function reindexDocs() {
-            const rows = document.getElementById('supportingDocList').getElementsByClassName('dynamic-item');
-            for (let i = 0; i < rows.length; i++) {
-                rows[i].setAttribute('data-index', i + 1);
-                rows[i].querySelector('.doc-seq').value = i + 1;
+            // Cleanup potential dashes/slashes inside the input to ensure string matches YYYYMMDD
+            const formattedDate = dateInput.value.replace(/[-/]/g, "");
+
+            buttonElement.innerText = "Fetching...";
+            buttonElement.disabled = true;
+
+            try {
+                // Fetch request sent to your custom integration proxy backend running at port 5000
+                const response = await fetch(`http://localhost:5000/get-cin?port=${encodeURIComponent(portInput.value)}&sb_no=${encodeURIComponent(sbInput.value)}&sb_date=${encodeURIComponent(formattedDate)}`);
+                const data = await response.json();
+
+                if (data.success) {
+                    pcinInput.value = data.cin;
+                } else {
+                    alert("Error from ICEGATE Proxy: " + data.error);
+                }
+            } catch (error) {
+                alert("Could not reach backend server proxy at port 5000. Verify that your Python/Node background script is running.");
+            } finally {
+                buttonElement.innerText = "Fetch CIN";
+                buttonElement.disabled = false;
             }
         }
 
@@ -746,113 +606,92 @@
                 return;
             }
 
-            // Read header parameters
             const senderID = document.getElementById('senderID').value;
             const portOfReporting = document.getElementById('portOfReporting').value;
             const msgID = document.getElementById('messageType').value;
-            const jobNo = document.getElementById('jobNumber').value;
-            const rawJobDate = document.getElementById('jobDate').value; // YYYY-MM-DD
-            const formattedJobDate = rawJobDate.replace(/-/g, ''); // YYYYMMDD
+            const jobNo = parseInt(document.getElementById('jobNumber').value);
+            const formattedJobDate = document.getElementById('jobDate').value;
             const reportingEvent = document.getElementById('reportingEvent').value;
 
-            // Build hierarchical output payload structure
             const payload = {
                 headerField: {
-                    senderID: senderID,
-                    receiverID: portOfReporting,
-                    versionNo: "1102",
-                    indicator: "P", 
+                    indicator: "P",
                     messageID: msgID,
-                    sequenceOrControlNumber: parseInt(jobNo) || 1003,
+                    sequenceOrControlNumber: jobNo,
                     date: formattedJobDate,
                     time: "T" + new Date().toTimeString().substring(0,5),
-                    reportingEvent: reportingEvent
+                    reportingEvent: reportingEvent,
+                    senderID: senderID,
+                    receiverID: portOfReporting,
+                    versionNo: "1.0"
                 },
                 master: {
-                    partyType: document.getElementById('reportingPartyType').value,
-                    custodianCommercialCode: document.getElementById('custodianCode').value,
-                    reportingLocationName: document.getElementById('reportingLocationName').value,
-                    reportingLocationCode: document.getElementById('reportingLocationCode').value,
-                    authorizedPersonPan: document.getElementById('authorisedPersonPan').value
-                },
-                cargoContainer: [
-                    {
-                        equipmentSequenceNo: parseInt(document.getElementById('eqSeqNo').value) || 1,
-                        equipmentId: document.getElementById('containerID').value,
-                        equipmentType: document.getElementById('equipmentType').value,
-                        equipmentSize: document.getElementById('equipmentSize').value,
-                        equipmentLoadStatus: document.getElementById('equipmentLoadStatus').value,
-                        additionalEquipmentHold: document.getElementById('additionalEqHold').value || null,
-                        finalDestinationLocation: document.getElementById('finalDestLocation').value,
-                        eventDate: document.getElementById('eventDate').value,
-                        equipmentSealType: document.getElementById('equipmentSealType').value,
-                        equipmentSealNumber: document.getElementById('equipmentSealNumber').value,
-                        otherEquipmentId: document.getElementById('otherEquipmentID').value || null,
-                        equipmentStatus: document.getElementById('equipmentStatus').value,
-                        equipmentPackage: document.getElementById('equipmentPackage').value || null,
-                        equipmentQuantity: document.getElementById('equipmentQuantity').value ? parseInt(document.getElementById('equipmentQuantity').value) : null,
-                        equipmentUqc: document.getElementById('equipmentUQC').value || null
-                    }
-                ],
-                cargoDocument: [],
-                supportingDocument: []
+                    declaration: {
+                        messageType: "F",
+                        portOfReporting: portOfReporting,
+                        jobNo: jobNo,
+                        jobDate: formattedJobDate,
+                        reportingEvent: reportingEvent
+                    },
+                    location: {
+                        reportingPartyType: document.getElementById('reportingPartyType').value,
+                        reportingPartyCode: document.getElementById('custodianCode').value,
+                        reportingLocationCode: document.getElementById('reportingLocationCode').value,
+                        reportingLocationName: document.getElementById('reportingLocationName').value,
+                        authorisedPersonPAN: document.getElementById('authorisedPersonPan').value
+                    },
+                    cargoContainer: [
+                        {
+                            messageType: "F",
+                            equipmentSequenceNo: parseInt(document.getElementById('eqSeqNo').value) || 1,
+                            equipmentID: document.getElementById('containerID').value,
+                            equipmentType: document.getElementById('equipmentType').value,
+                            equipmentSize: document.getElementById('equipmentSize').value,
+                            equipmentLoadStatus: document.getElementById('equipmentLoadStatus').value,
+                            finalDestinationLocation: document.getElementById('finalDestLocation').value,
+                            eventDate: document.getElementById('eventDate').value,
+                            equipmentSealType: document.getElementById('equipmentSealType').value,
+                            equipmentSealNumber: document.getElementById('equipmentSealNumber').value,
+                            equipmentStatus: document.getElementById('equipmentStatus').value,
+                            equipmentPkg: document.getElementById('equipmentPackage').value,
+                            equipmentQuantity: parseInt(document.getElementById('equipmentQuantity').value),
+                            equipmentQUC: document.getElementById('equipmentQUC').value,
+                            cargoDetails: []
+                        }
+                    ]
+                }
             };
 
-            // Parse array nodes for Cargo Entries
             const cargoRows = document.getElementById('cargoContainerList').getElementsByClassName('dynamic-item');
             for (let row of cargoRows) {
-                payload.cargoDocument.push({
+                payload.master.cargoContainer[0].cargoDetails.push({
+                    messageType: "F",
                     cargoSequenceNo: parseInt(row.querySelector('.cargo-seq').value),
                     documentType: row.querySelector('.cargo-doc-type').value,
                     documentSite: row.querySelector('.cargo-doc-site').value,
-                    documentNumber: row.querySelector('.cargo-doc-num').value,
+                    documentNumber: parseInt(row.querySelector('.cargo-doc-num').value) || 0,
                     documentDate: row.querySelector('.cargo-doc-date').value,
                     shipmentLoadStatus: row.querySelector('.cargo-load-status').value,
                     packageType: row.querySelector('.cargo-pkg-type').value,
                     quantity: parseInt(row.querySelector('.cargo-qty').value) || 0,
-                    packetsFrom: row.querySelector('.cargo-pkts-from').value || null,
-                    packetsTo: row.querySelector('.cargo-pkts-to').value || null,
-                    packUqc: row.querySelector('.cargo-uqc').value || null,
+                    packetsFrom: parseInt(row.querySelector('.cargo-pkts-from').value) || 1,
+                    packetsTo: parseInt(row.querySelector('.cargo-pkts-to').value) || 0,
                     mcinPcin: row.querySelector('.cargo-pcin').value
                 });
             }
 
-            // Parse array nodes for Supporting Docs if any exist
-            const docRows = document.getElementById('supportingDocList').getElementsByClassName('dynamic-item');
-            for (let row of docRows) {
-                payload.supportingDocument.push({
-                    docSequenceNo: parseInt(row.querySelector('.doc-seq').value),
-                    docTypeCode: row.querySelector('.doc-type').value,
-                    docRefNo: row.querySelector('.doc-ref').value,
-                    beneficiaryCode: row.querySelector('.doc-ben-code').value || null,
-                    icegateUserId: senderID
-                });
-            }
-
-            // Standardize ICEGATE Digital Signature Empty Placeholder structure to be appended before DSC validation
-            payload.digSign = {
-                startSignature: "",
-                startCertificate: "",
-                signerVersion: "2.0"
-            };
-
-            // Calculate precise official naming parameter string
             generatedFilenameStr = `F_${msgID}_${reportingEvent}_${senderID}_${jobNo}_${formattedJobDate}_DEC.json`;
-            
-            // Render inside Dashboard preview screen area
             generatedJsonData = payload;
+
             document.getElementById('generatedFilename').innerText = generatedFilenameStr;
             document.getElementById('jsonPreview').innerText = JSON.stringify(payload, null, 2);
             document.getElementById('outputPanel').style.display = 'block';
-            
-            // Scroll preview window cleanly into frame view
             document.getElementById('outputPanel').scrollIntoView({ behavior: 'smooth' });
         }
 
         function downloadJSONFile() {
             if (!generatedJsonData) return;
-            
-            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(generatedJsonData, null, 2));
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(generatedJsonData));
             const downloadAnchorNode = document.createElement('a');
             downloadAnchorNode.setAttribute("href", dataStr);
             downloadAnchorNode.setAttribute("download", generatedFilenameStr);
