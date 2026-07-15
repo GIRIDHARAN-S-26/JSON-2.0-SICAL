@@ -3,114 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SICAL CFS - SCMTR Multi-JSON Generator</title>
+    <title>ICEGATE SCMTR JSON Utility - Stuffing</title>
     <style>
         :root {
-            --primary-color: #0ea5e9;
-            --primary-dark: #0284c7;
-            --success-color: #10b981;
-            --danger-color: #ef4444;
-            --bg-main: #f1f5f9;
-            --bg-card: #ffffff;
-            --text-main: #1e293b;
-            --text-muted: #64748b;
-            --border-color: #cbd5e1;
-            --menu-bg: #f8fafc;
+            --primary: #007bff;
+            --primary-hover: #0056b3;
+            --success: #28a745;
+            --success-hover: #218838;
+            --danger: #dc3545;
+            --gray-bg: #e0e0e0;
+            --panel-bg: #d4d4d4;
+            --border-color: #a0a0a0;
+            --text-color: #212529;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
         }
 
         body {
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            background-color: var(--bg-main);
-            margin: 0;
-            padding: 30px 20px;
-            color: var(--text-main);
-            line-height: 1.5;
+            background-color: var(--gray-bg);
+            color: var(--text-color);
+            padding: 20px;
         }
 
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            background: var(--bg-card);
-            padding: 35px;
-            border-radius: 12px;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+        .header-banner {
+            background-color: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 15px;
+            font-size: 24px;
+            font-weight: bold;
+            border-radius: 4px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
-        .header {
-            border-bottom: 2px solid #e2e8f0;
-            padding-bottom: 20px;
-            margin-bottom: 30px;
+        .location-selector-card {
+            background: #f8f9fa;
+            border: 2px solid var(--border-color);
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 25px;
         }
 
-        .header h1 {
-            margin: 0;
-            font-size: 28px;
-            font-weight: 700;
-            color: #0f172a;
-            letter-spacing: -0.025em;
+        .location-selector-card h3 {
+            margin-bottom: 15px;
+            color: #333;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 2px solid #ccc;
+            padding-bottom: 5px;
         }
 
-        .header p {
-            margin: 6px 0 0 0;
-            color: var(--text-muted);
-            font-size: 14px;
+        .radio-group {
+            display: flex;
+            gap: 30px;
+        }
+
+        .radio-label {
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            background: #fff;
+            padding: 10px 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+
+        .radio-label input {
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+
+        .radio-label:hover {
+            border-color: var(--primary);
+            background-color: #f1f7ff;
+        }
+
+        .radio-label.active {
+            border-color: var(--primary);
+            background-color: #e6f0ff;
+            box-shadow: 0 0 0 2px rgba(0,123,255,0.25);
         }
 
         fieldset {
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 24px;
-            margin-bottom: 30px;
-            background-color: var(--bg-card);
+            background-color: var(--panel-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 4px;
+            padding: 20px;
+            margin-bottom: 25px;
+            position: relative;
         }
 
         legend {
-            font-weight: 600;
-            padding: 0 12px;
-            color: #334155;
-            font-size: 16px;
-        }
-
-        .location-menu-panel {
-            background-color: var(--menu-bg);
-            border: 1px solid #e2e8f0;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 30px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.02);
-        }
-
-        .location-menu-panel label {
-            font-weight: 600;
-            font-size: 15px;
-            color: #475569;
-        }
-
-        .location-select {
-            padding: 10px 16px;
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--primary-dark);
-            border: 2px solid var(--primary-color);
-            border-radius: 6px;
-            background-color: #fff;
-            cursor: pointer;
-            outline: none;
-            transition: all 0.2s;
-        }
-        
-        .location-select:hover {
-            border-color: var(--primary-dark);
-            background-color: #f0f9ff;
+            background: none;
+            border: 2px solid #444;
+            padding: 5px 15px;
+            font-weight: bold;
+            font-size: 18px;
+            color: #111;
+            margin-left: 10px;
+            margin-bottom: 0;
         }
 
         .form-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 15px;
+            margin-top: 10px;
         }
 
         .form-group {
@@ -119,488 +127,739 @@
         }
 
         .form-group label {
-            margin-bottom: 8px;
             font-size: 13px;
-            font-weight: 600;
-            color: #475569;
+            font-weight: 500;
+            margin-bottom: 4px;
+            color: #333;
         }
 
-        input, select {
-            padding: 10px 14px;
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
+        .form-group label .required {
+            color: var(--danger);
+            font-weight: bold;
+            margin-left: 2px;
+        }
+
+        .form-control {
+            padding: 6px 8px;
             font-size: 14px;
-            outline: none;
+            border: 1px solid #888;
+            border-radius: 4px;
             background-color: #fff;
-            color: var(--text-main);
-            transition: all 0.2s;
+            height: 34px;
         }
 
-        input:focus, select:focus {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.15);
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(0,123,255,0.25);
         }
 
-        /* Container Section Layout Styling */
-        .container-block {
-            border: 1px solid #bae6fd;
-            padding: 24px;
-            border-radius: 8px;
-            margin-bottom: 25px;
-            background-color: #f8fafc;
+        .form-control[readonly] {
+            background-color: #c8c8c8;
+            color: #333;
+            cursor: not-allowed;
+            border-color: #999;
+        }
+
+        .dynamic-item {
+            background: rgba(255,255,255,0.4);
+            border: 1px dashed #999;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 15px;
             position: relative;
-            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
         }
 
-        .container-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            border-bottom: 1px solid #e2e8f0;
-            padding-bottom: 12px;
-        }
-
-        .container-title {
-            font-weight: 600;
-            color: var(--primary-dark);
-            font-size: 15px;
-        }
-
-        /* Cargo Section Layout Styling */
-        .cargo-section {
-            margin-top: 20px;
-            padding-left: 20px;
-            border-left: 3px solid var(--success-color);
-        }
-
-        .cargo-block {
-            background-color: #ffffff;
-            border: 1px solid #a7f3d0;
-            padding: 18px;
-            border-radius: 6px;
-            margin-bottom: 12px;
-            position: relative;
-            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.02);
-        }
-
-        .cargo-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-            font-size: 13px;
-            font-weight: 600;
-            color: #047857;
-        }
-
-        /* Action Controls Buttons */
-        .btn {
-            font-weight: 600;
-            border-radius: 6px;
-            cursor: pointer;
-            border: none;
-            transition: all 0.2s;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .btn-submit {
-            background-color: var(--success-color);
+        .dynamic-item .remove-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--danger);
             color: white;
-            padding: 14px 45px;
-            font-size: 16px;
-            box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.2);
+            border: none;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            cursor: pointer;
         }
 
-        .btn-submit:hover { 
-            background-color: #059669; 
+        .dynamic-item .remove-btn:hover {
+            background-color: #bd2130;
+        }
+
+        .action-btn {
+            background-color: var(--success);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background 0.2s;
+        }
+
+        .action-btn:hover {
+            background-color: var(--success-hover);
+        }
+
+        .center-actions {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .generate-btn {
+            background-color: var(--success);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+            transition: all 0.2s;
+        }
+
+        .generate-btn:hover {
+            background-color: var(--success-hover);
             transform: translateY(-1px);
         }
 
-        .btn-add-container {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 10px 20px;
-            margin-bottom: 25px;
-            font-size: 14px;
+        .output-panel {
+            background-color: #272822;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 4px;
+            margin-top: 25px;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
+            display: none;
         }
 
-        .btn-add-container:hover { background-color: var(--primary-dark); }
-
-        .btn-add-cargo {
-            background-color: #06b6d4;
-            color: white;
-            padding: 8px 14px;
-            font-size: 12px;
-            margin-top: 12px;
+        .output-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #49483e;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
         }
 
-        .btn-add-cargo:hover { background-color: #0891b2; }
+        .output-header h3 {
+            margin: 0;
+            font-size: 16px;
+            color: #a6e22e;
+        }
 
-        .btn-danger {
-            background-color: #fef2f2;
-            color: var(--danger-color);
-            border: 1px solid #fee2e2;
+        .download-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
             padding: 6px 12px;
+            font-size: 13px;
+            font-weight: 600;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .download-btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-family: "Courier New", Courier, monospace;
+            font-size: 13px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .filename-preview {
             font-size: 12px;
-        }
-
-        .btn-danger:hover { 
-            background-color: var(--danger-color); 
-            color: white;
-            border-color: var(--danger-color);
-        }
-
-        .button-zone {
-            text-align: center;
-            margin-top: 40px;
-        }
-
-        .footer {
-            margin-top: 50px;
-            text-align: center;
-            font-size: 12px;
-            color: var(--text-muted);
-            border-top: 1px solid #e2e8f0;
-            padding-top: 20px;
+            color: #666;
+            margin-top: 5px;
+            font-style: italic;
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="header">
-        <h1>SICAL CFS - CONFIGURATOR</h1>
-        <p>JSON Entry Module (Supports Multiple Containers &amp; Multiple Cargo Lines)</p>
+    <div class="header-banner">
+        JSON Utility-Stuffing
     </div>
 
-    <!-- Location Selection Menu Screen Panel -->
-    <div class="location-menu-panel">
-        <label for="locationSelector">Select Reporting Location Menu Panel:</label>
-        <select id="locationSelector" class="location-select" onchange="applyLocationConfiguration()">
-            <option value="" selected>-- Select Location Template (Start Blank) --</option>
-            <option value="chennai">Chennai</option>
-            <option value="tuticorin">Tuticorin</option>
-            <option value="vizag">Vizag</option>
-        </select>
+    <!-- Location Selector -->
+    <div class="location-selector-card">
+        <h3>Select CFS Location Profile</h3>
+        <div class="radio-group">
+            <label class="radio-label active" id="lbl-chennai">
+                <input type="radio" name="cfs_location" value="chennai" checked onchange="updateLocationProfile('chennai')"> Chennai CFS
+            </label>
+            <label class="radio-label" id="lbl-tuticorin">
+                <input type="radio" name="cfs_location" value="tuticorin" onchange="updateLocationProfile('tuticorin')"> Tuticorin CFS
+            </label>
+            <label class="radio-label" id="lbl-vizag">
+                <input type="radio" name="cfs_location" value="vizag" onchange="updateLocationProfile('vizag')"> Vizag CFS
+            </label>
+        </div>
     </div>
 
-    <form id="jsonForm" onsubmit="processAndDownload(event)">
-        
+    <form id="stuffingForm">
+        <!-- Manifest Master / Message Head -->
         <fieldset>
-            <legend>Manifest Master / Message Head</legend>
+            <legend>Manifest_Master/Message Head</legend>
             <div class="form-grid">
                 <div class="form-group">
-                    <label>Message ID</label>
-                    <input type="text" id="messageID" value="" required>
+                    <label>SenderID <span class="required">*</span></label>
+                    <input type="text" id="senderID" class="form-control" readonly required>
                 </div>
                 <div class="form-group">
-                    <label>Sender ID</label>
-                    <input type="text" id="senderID" value="" required>
+                    <label>Message Type <span class="required">*</span></label>
+                    <select id="messageType" class="form-control" required>
+                        <option value="CUCHE01" selected>CUCHE01</option>
+                    </select>
                 </div>
                 <div class="form-group">
-                    <label>Port of Reporting</label>
-                    <input type="text" id="portOfReporting" value="" required>
+                    <label>Port of Reporting <span class="required">*</span></label>
+                    <input type="text" id="portOfReporting" class="form-control" readonly required>
                 </div>
                 <div class="form-group">
-                    <label>Job Number</label>
-                    <input type="number" id="jobNo" value="" required>
+                    <label>Job Number <span class="required">*</span></label>
+                    <input type="text" id="jobNumber" class="form-control" value="1003" required>
                 </div>
                 <div class="form-group">
-                    <label>Job Date</label>
-                    <input type="date" id="jobDate" value="" required>
+                    <label>Job Date <span class="required">*</span></label>
+                    <input type="date" id="jobDate" class="form-control" required>
                 </div>
                 <div class="form-group">
-                    <label>Reporting Event</label>
-                    <select id="reportingEvent">
+                    <label>Reporting Event <span class="required">*</span></label>
+                    <select id="reportingEvent" class="form-control" required>
                         <option value="SF" selected>SF - STUFFING</option>
+                        <option value="ST">ST - STRIPPING</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Reporting party Type <span class="required">*</span></label>
+                    <select id="reportingPartyType" class="form-control" readonly required>
+                        <option value="C" selected>C - CUSTODIAN</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Reporting Party Code or Custodian Code <span class="required">*</span></label>
+                    <input type="text" id="custodianCode" class="form-control" value="AALCS0399C" readonly required>
+                </div>
+                <div class="form-group">
+                    <label>Reporting Location Name <span class="required">*</span></label>
+                    <input type="text" id="reportingLocationName" class="form-control" value="SICAL CFS" readonly required>
+                </div>
+                <div class="form-group">
+                    <label>Reporting Location Code <span class="required">*</span></label>
+                    <input type="text" id="reportingLocationCode" class="form-control" readonly required>
+                </div>
+                <div class="form-group">
+                    <label>Authorised Person PAN <span class="required">*</span></label>
+                    <input type="text" id="authorisedPersonPan" class="form-control" readonly required>
+                </div>
+            </div>
+        </fieldset>
+
+        <!-- Cargo Container -->
+        <fieldset>
+            <legend>Cargo Container</legend>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Equipment Sequence No <span class="required">*</span></label>
+                    <input type="text" id="eqSeqNo" class="form-control" value="1" readonly required>
+                </div>
+                <div class="form-group">
+                    <label>Container ID <span class="required">*</span></label>
+                    <input type="text" id="containerID" class="form-control" placeholder="e.g. MSKU1234567" required>
+                </div>
+                <div class="form-group">
+                    <label>Equipment Type <span class="required">*</span></label>
+                    <select id="equipmentType" class="form-control" required>
+                        <option value="">EQUIPMENT TYPE</option>
+                        <option value="CN" selected>CN - CONTAINER</option>
+                        <option value="CH">CH - CHASSIS</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Equipment Size <span class="required">*</span></label>
+                    <input type="text" id="equipmentSize" class="form-control" placeholder="e.g. 20 / 40" required>
+                </div>
+                <div class="form-group">
+                    <label>Equipment Load Status <span class="required">*</span></label>
+                    <select id="equipmentLoadStatus" class="form-control" required>
+                        <option value="">EQUIPMENT LOAD STATUS</option>
+                        <option value="F" selected>F - FULL</option>
+                        <option value="E">E - EMPTY</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Additional Equipment Hold</label>
+                    <input type="text" id="additionalEqHold" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Final Destination Location <span class="required">*</span></label>
+                    <input type="text" id="finalDestLocation" class="form-control" placeholder="e.g. INNSA1" required>
+                </div>
+                <div class="form-group">
+                    <label>Event Date <span class="required">*</span></label>
+                    <input type="text" id="eventDate" class="form-control" placeholder="E.G 20190912T23:10" required>
+                </div>
+                <div class="form-group">
+                    <label>Equipment Seal Type <span class="required">*</span></label>
+                    <select id="equipmentSealType" class="form-control" required>
+                        <option value="">EQUIPMENT SEAL TYPE</option>
+                        <option value="E" selected>E - CUSTOMS SEAL</option>
+                        <option value="W">W - WAREHOUSE SEAL</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Equipment Seal Number <span class="required">*</span></label>
+                    <input type="text" id="equipmentSealNumber" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>Other Equipment ID</label>
+                    <input type="text" id="otherEquipmentID" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Equipment Status <span class="required">*</span></label>
+                    <select id="equipmentStatus" class="form-control" required>
+                        <option value="">EQUIPMENT STATUS</option>
+                        <option value="A" selected>A - ACTIVE / LOADED</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Equipment Package</label>
+                    <input type="text" id="equipmentPackage" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Equipment Quantity</label>
+                    <input type="number" id="equipmentQuantity" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Equipment UQC</label>
+                    <select id="equipmentUQC" class="form-control">
+                        <option value="">SELECT EQUIPMENT UQC</option>
+                        <option value="KGS" selected>KGS - KILOGRAMS</option>
+                        <option value="TON">TON - TONNES</option>
                     </select>
                 </div>
             </div>
         </fieldset>
 
+        <!-- Cargo Details -->
         <fieldset>
-            <legend>Reporting Party &amp; Location Info</legend>
-            <div class="form-grid">
-                <div class="form-group">
-                    <label>Reporting Party Code (Custodian)</label>
-                    <input type="text" id="reportingPartyCode" value="" required>
-                </div>
-                <div class="form-group">
-                    <label>Reporting Location Code</label>
-                    <input type="text" id="reportingLocationCode" value="" required>
-                </div>
-                <div class="form-group">
-                    <label>Reporting Location Name</label>
-                    <input type="text" id="reportingLocationName" value="" required>
-                </div>
-                <div class="form-group">
-                    <label>Authorised Person PAN</label>
-                    <input type="text" id="authorisedPAN" value="" required>
+            <legend>Cargo Details</legend>
+            <div id="cargoContainerList">
+                <!-- Initial Cargo Entry -->
+                <div class="dynamic-item" data-index="1">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Cargo Sequence No <span class="required">*</span></label>
+                            <input type="text" class="form-control cargo-seq" value="1" readonly required>
+                        </div>
+                        <div class="form-group">
+                            <label>Document Type <span class="required">*</span></label>
+                            <select class="form-control cargo-doc-type" required>
+                                <option value="">DOCUMENT TYPE</option>
+                                <option value="SB" selected>SB - SHIPPING BILL</option>
+                                <option value="BOE">BOE - BILL OF ENTRY</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Document Site <span class="required">*</span></label>
+                            <input type="text" class="form-control cargo-doc-site" placeholder="e.g. INMAA1" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Document Number <span class="required">*</span></label>
+                            <input type="text" class="form-control cargo-doc-num" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Document Date <span class="required">*</span></label>
+                            <input type="text" class="form-control cargo-doc-date" placeholder="YYYYMMDD" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Shipment Load Status <span class="required">*</span></label>
+                            <select class="form-control cargo-load-status" required>
+                                <option value="">SHIPMENT LOAD STATUS</option>
+                                <option value="F" selected>F - FULL LOAD</option>
+                                <option value="P">P - PARTIAL LOAD</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Package Type <span class="required">*</span></label>
+                            <select class="form-control cargo-pkg-type" required>
+                                <option value="">PACKAGE TYPE</option>
+                                <option value="BOX" selected>BOX</option>
+                                <option value="CRT">CRATE</option>
+                                <option value="BGS">BAGS</option>
+                                <option value="PCS">PIECES</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Quantity <span class="required">*</span></label>
+                            <input type="number" class="form-control cargo-qty" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Packets From</label>
+                            <input type="text" class="form-control cargo-pkts-from">
+                        </div>
+                        <div class="form-group">
+                            <label>Packets To</label>
+                            <input type="text" class="form-control cargo-pkts-to">
+                        </div>
+                        <div class="form-group">
+                            <label>Pack UQC</label>
+                            <input type="text" class="form-control cargo-uqc" placeholder="e.g. NOS">
+                        </div>
+                        <div class="form-group">
+                            <label>MCIN/PCIN <span class="required">*</span></label>
+                            <input type="text" class="form-control cargo-pcin" placeholder="PCIN Number" required>
+                        </div>
+                    </div>
                 </div>
             </div>
+            <button type="button" class="action-btn" onclick="addCargoDetails()">Add New Cargo details</button>
         </fieldset>
 
+        <!-- Supporting Docs -->
         <fieldset>
-            <legend>Equipment / Container Manifest Registry</legend>
-            
-            <div id="containersWrapper"></div>
-
-            <button type="button" class="btn btn-add-container" onclick="addContainerBlock()">+ Add Container</button>
+            <legend>Supporting Docs</legend>
+            <div id="supportingDocList">
+                <!-- Dynamic Content Area -->
+            </div>
+            <button type="button" class="action-btn" onclick="addSupportingDoc()">Add New Doc</button>
         </fieldset>
 
-        <div class="button-zone">
-            <button type="submit" class="btn btn-submit">Generate &amp; Download JSON</button>
+        <div class="center-actions">
+            <button type="button" class="generate-btn" onclick="generateSCMTRJson()">Generate JSON</button>
+            <div class="filename-preview" id="filenamePreview"></div>
         </div>
     </form>
 
-    <div class="footer">
-        Copyright &copy; 2026 Design and Developed by National Informatics Centre. Version 2.0
+    <!-- Output Section -->
+    <div class="output-panel" id="outputPanel">
+        <div class="output-header">
+            <h3 id="generatedFilename">F_CUCHE01_SF_..._DEC.json</h3>
+            <button class="download-btn" onclick="downloadJSONFile()">Download JSON File</button>
+        </div>
+        <pre id="jsonPreview"></pre>
     </div>
-</div>
 
-<script>
-    let containerCounter = 0;
-
-    // Location Config Object Matrix Map
-    const locationConfigs = {
-        chennai: {
-            senderID: "ALSPD8726BCCD002",
-            portOfReporting: "INMAA1",
-            reportingLocationCode: "INMAA1",
-            authorisedPAN: "DERPS9790K"
-        },
-        tuticorin: {
-            senderID: "ALSPD8726BCCD001",
-            portOfReporting: "INTUT1",
-            reportingLocationCode: "INTUT1",
-            authorisedPAN: "CGYPS5520H"
-        },
-        vizag: {
-            senderID: "INVTZ1SMR1",
-            portOfReporting: "INVTZ1",
-            reportingLocationCode: "INVTZ1",
-            authorisedPAN: "ALSPD8726B"
-        }
-    };
-
-    function applyLocationConfiguration() {
-        const selectedLoc = document.getElementById('locationSelector').value;
-        
-        if (!selectedLoc) {
-            document.getElementById('messageID').value = "";
-            document.getElementById('senderID').value = "";
-            document.getElementById('portOfReporting').value = "";
-            document.getElementById('reportingPartyCode').value = "";
-            document.getElementById('reportingLocationCode').value = "";
-            document.getElementById('reportingLocationName').value = "";
-            document.getElementById('authorisedPAN').value = "";
-            return;
-        }
-
-        const data = locationConfigs[selectedLoc];
-
-        document.getElementById('messageID').value = "CUCHE01";
-        document.getElementById('reportingPartyCode').value = "AALCS0399C";
-        document.getElementById('reportingLocationName').value = "SICAL CFS";
-
-        document.getElementById('senderID').value = data.senderID;
-        document.getElementById('portOfReporting').value = data.portOfReporting;
-        document.getElementById('reportingLocationCode').value = data.reportingLocationCode;
-        document.getElementById('authorisedPAN').value = data.authorisedPAN;
-    }
-
-    document.addEventListener("DOMContentLoaded", function() {
-        addContainerBlock();
-    });
-
-    function addContainerBlock() {
-        containerCounter++;
-        const containerWrapper = document.getElementById('containersWrapper');
-
-        const containerHtml = `
-            <div class="container-block" id="containerBlock_${containerCounter}" data-index="${containerCounter}">
-                <div class="container-header">
-                    <span class="container-title">Container Entry #${containerCounter}</span>
-                    ${containerCounter > 1 ? `<button type="button" class="btn btn-danger" onclick="removeElement('containerBlock_${containerCounter}')">Remove Container</button>` : ''}
-                </div>
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label>Container / Equipment ID</label>
-                        <input type="text" class="element-equipmentID" value="" placeholder="e.g. WHSU2834040" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Equipment Size</label>
-                        <input type="text" class="element-equipmentSize" value="" placeholder="e.g. 20" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Equipment E-Seal Number</label>
-                        <input type="text" class="element-equipmentSealNumber" value="" placeholder="e.g. ESSC01188177" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Equipment Total Qty</label>
-                        <input type="number" class="element-equipmentQuantity" value="" placeholder="e.g. 358" required>
-                    </div>
-                </div>
-
-                <div class="cargo-section">
-                    <div class="cargo-wrapper" id="cargoWrapper_${containerCounter}"></div>
-                    <button type="button" class="btn btn-add-cargo" onclick="addCargoBlock(${containerCounter})">+ Add Cargo Row to this Container</button>
-                </div>
-            </div>
-        `;
-        
-        containerWrapper.insertAdjacentHTML('beforeend', containerHtml);
-        addCargoBlock(containerCounter);
-    }
-
-    function addCargoBlock(containerId) {
-        const targetCargoWrapper = document.getElementById(`cargoWrapper_${containerId}`);
-        const currentCargoLines = targetCargoWrapper.getElementsByClassName('cargo-block').length + 1;
-
-        const cargoHtml = `
-            <div class="cargo-block">
-                <div class="cargo-header">
-                    <span>Cargo Line Information Line Item</span>
-                    ${currentCargoLines > 1 ? `<button type="button" class="btn btn-danger" style="padding:4px 8px;" onclick="this.parentElement.parentElement.remove()">Remove Cargo</button>` : ''}
-                </div>
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label>Quantity</label>
-                        <input type="number" class="element-cargoQuantity" value="" placeholder="e.g. 358" required>
-                    </div>
-                    <div class="form-group" style="grid-column: span 2;">
-                        <label>MCIN / PCIN Number</label>
-                        <input type="text" class="element-cargoMcinPcin" value="" placeholder="e.g. 25PCEG12242905694800" required>
-                    </div>
-                </div>
-            </div>
-        `;
-        targetCargoWrapper.insertAdjacentHTML('beforeend', cargoHtml);
-    }
-
-    function removeElement(id) {
-        const targetElement = document.getElementById(id);
-        if(targetElement) targetElement.remove();
-    }
-
-    function processAndDownload(event) {
-        event.preventDefault();
-
-        const msgId = document.getElementById('messageID').value.trim();
-        const senderId = document.getElementById('senderID').value.trim();
-        const portOfReport = document.getElementById('portOfReporting').value.trim();
-        const jobNo = document.getElementById('jobNo').value.trim();
-        const rawDate = document.getElementById('jobDate').value;
-        const formattedDate = rawDate.replace(/-/g, "");
-        
-        const repPartyCode = document.getElementById('reportingPartyCode').value.trim();
-        const repLocCode = document.getElementById('reportingLocationCode').value.trim();
-        const repLocName = document.getElementById('reportingLocationName').value.trim();
-        const authPan = document.getElementById('authorisedPAN').value.trim();
-
-        const structuralContainersArray = [];
-        const containerBlocks = document.getElementsByClassName('container-block');
-
-        for (let i = 0; i < containerBlocks.length; i++) {
-            const currentBlock = containerBlocks[i];
-            
-            const eqId = currentBlock.querySelector('.element-equipmentID').value.trim();
-            const eqSize = currentBlock.querySelector('.element-equipmentSize').value.trim();
-            const eqSeal = currentBlock.querySelector('.element-equipmentSealNumber').value.trim();
-            const eqQty = parseInt(currentBlock.querySelector('.element-equipmentQuantity').value, 10);
-
-            const structuralCargoArray = [];
-            const cargoBlocks = currentBlock.getElementsByClassName('cargo-block');
-
-            for (let j = 0; j < cargoBlocks.length; j++) {
-                const currentCargo = cargoBlocks[j];
-                const cQty = parseInt(currentCargo.querySelector('.element-cargoQuantity').value, 10);
-                const cMcin = currentCargo.querySelector('.element-cargoMcinPcin').value.trim();
-
-                structuralCargoArray.push({
-                    "messageType": "F",
-                    "cargoSequenceNo": j + 1,
-                    "documentType": "ESB",
-                    "documentSite": portOfReport,
-                    "documentNumber": "8164013",
-                    "documentDate": formattedDate,
-                    "shipmentLoadStatus": "F",
-                    "packageType": "P",
-                    "quantity": cQty,
-                    "packetsFrom": 1,
-                    "packetsTo": cQty,
-                    "packUQC": "P",
-                    "mcinPcin": cMcin
-                });
-            }
-
-            structuralContainersArray.push({
-                "messageType": "F",
-                "equipmentSequenceNo": i + 1,
-                "equipmentID": eqId,
-                "equipmentType": "BL",
-                "equipmentSize": eqSize,
-                "equipmentLoadStatus": "FCL",
-                "finalDestinationLocation": "INMAA1CCT1",
-                "eventDate": formattedDate + "T12:15",
-                "equipmentSealType": "E",
-                "equipmentSealNumber": eqSeal,
-                "equipmentStatus": "94",
-                "equipmentQuantity": eqQty,
-                "equipmentQUC": "PKG",
-                "cargoDetails": structuralCargoArray
-            });
-        }
-
-        const finalPayload = {
-            "headerField": {
-                "indicator": "P",
-                "messageID": msgId,
-                "sequenceOrControlNumber": 6,
-                "date": formattedDate,
-                "time": "T" + new Date().toTimeString().split(' ')[0].substring(0,5),
-                "reportingEvent": "SF",
-                "senderID": senderId,
-                "receiverID": portOfReport,
-                "versionNo": "2"
+    <script>
+        // Configuration metadata mapping for locations
+        const locationProfiles = {
+            chennai: {
+                senderID: "ALSPD8726BCCD002",
+                portOfReporting: "INMAA1",
+                reportingLocationCode: "INMAA1",
+                authorisedPersonPan: "DERPS9790K"
             },
-            "master": {
-                "declaration": {
-                    "messageType": "F",
-                    "portOfReporting": portOfReport,
-                    "jobNo": parseInt(jobNo, 10),
-                    "jobDate": formattedDate,
-                    "reportingEvent": "SF"
-                },
-                "location": {
-                    "reportingPartyType": "C",
-                    "reportingPartyCode": repPartyCode,
-                    "reportingLocationCode": repLocCode,
-                    "reportingLocationName": repLocName,
-                    "authorisedPersonPAN": authPan
-                },
-                "cargoContainer": structuralContainersArray
+            tuticorin: {
+                senderID: "ALSPD8726BCCD001",
+                portOfReporting: "INTUT1",
+                reportingLocationCode: "INTUT1",
+                authorisedPersonPan: "CGYPS5520H"
+            },
+            vizag: {
+                senderID: "INVTZ1SMR1",
+                portOfReporting: "INVTZ1",
+                reportingLocationCode: "INVTZ1",
+                authorisedPersonPan: "ALSPD8726B"
             }
         };
 
-        const generatedFilename = `F_${msgId}_SFCN_${senderId}_${jobNo}_${formattedDate}_DEC.json`;
-        const jsonString = JSON.stringify(finalPayload, null, 2);
-        const dataBlob = new Blob([jsonString], { type: 'application/json' });
-        const downloadUrl = URL.createObjectURL(dataBlob);
-        
-        const helperLink = document.createElement('a');
-        helperLink.href = downloadUrl;
-        helperLink.download = generatedFilename;
-        document.body.appendChild(helperLink);
-        helperLink.click();
-        
-        document.body.removeChild(helperLink);
-        URL.revokeObjectURL(downloadUrl);
-    }
-</script>
+        let generatedJsonData = null;
+        let generatedFilenameStr = "";
 
+        // Initialize defaults
+        window.onload = function() {
+            // Set dynamic default date fields
+            const today = new Date();
+            const yyyy = today.getFullYear();
+            const mm = String(today.getMonth() + 1).padStart(2, '0');
+            const dd = String(today.getDate()).padStart(2, '0');
+            
+            document.getElementById('jobDate').value = `${yyyy}-${mm}-${dd}`;
+            
+            // Format Event date placeholder style: YYYYMMDDTHH:MM
+            const hh = String(today.getHours()).padStart(2, '0');
+            const min = String(today.getMinutes()).padStart(2, '0');
+            document.getElementById('eventDate').value = `${yyyy}${mm}${dd}T${hh}:${min}`;
+
+            // Sync structural parameters
+            updateLocationProfile('chennai');
+        };
+
+        function updateLocationProfile(locKey) {
+            // Update UI Active states
+            document.querySelectorAll('.radio-label').forEach(lbl => lbl.classList.remove('active'));
+            document.getElementById(`lbl-${locKey}`).classList.add('active');
+
+            const profile = locationProfiles[locKey];
+            document.getElementById('senderID').value = profile.senderID;
+            document.getElementById('portOfReporting').value = profile.portOfReporting;
+            document.getElementById('reportingLocationCode').value = profile.reportingLocationCode;
+            document.getElementById('authorisedPersonPan').value = profile.authorisedPersonPan;
+
+            // Auto populate document site default for the first cargo row to speed up operations
+            const firstDocSite = document.querySelector('.cargo-doc-site');
+            if (firstDocSite) {
+                firstDocSite.value = profile.portOfReporting;
+            }
+        }
+
+        function addCargoDetails() {
+            const container = document.getElementById('cargoContainerList');
+            const currentRows = container.getElementsByClassName('dynamic-item').length;
+            const nextIndex = currentRows + 1;
+
+            const targetSite = document.getElementById('portOfReporting').value;
+
+            const html = `
+                <div class="dynamic-item" data-index="${nextIndex}">
+                    <button type="button" class="remove-btn" onclick="this.parentElement.remove(); reindexCargo();">Remove</button>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Cargo Sequence No <span class="required">*</span></label>
+                            <input type="text" class="form-control cargo-seq" value="${nextIndex}" readonly required>
+                        </div>
+                        <div class="form-group">
+                            <label>Document Type <span class="required">*</span></label>
+                            <select class="form-control cargo-doc-type" required>
+                                <option value="">DOCUMENT TYPE</option>
+                                <option value="SB" selected>SB - SHIPPING BILL</option>
+                                <option value="BOE">BOE - BILL OF ENTRY</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Document Site <span class="required">*</span></label>
+                            <input type="text" class="form-control cargo-doc-site" value="${targetSite}" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Document Number <span class="required">*</span></label>
+                            <input type="text" class="form-control cargo-doc-num" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Document Date <span class="required">*</span></label>
+                            <input type="text" class="form-control cargo-doc-date" placeholder="YYYYMMDD" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Shipment Load Status <span class="required">*</span></label>
+                            <select class="form-control cargo-load-status" required>
+                                <option value="">SHIPMENT LOAD STATUS</option>
+                                <option value="F" selected>F - FULL LOAD</option>
+                                <option value="P">P - PARTIAL LOAD</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Package Type <span class="required">*</span></label>
+                            <select class="form-control cargo-pkg-type" required>
+                                <option value="">PACKAGE TYPE</option>
+                                <option value="BOX" selected>BOX</option>
+                                <option value="CRT">CRATE</option>
+                                <option value="BGS">BAGS</option>
+                                <option value="PCS">PIECES</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Quantity <span class="required">*</span></label>
+                            <input type="number" class="form-control cargo-qty" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Packets From</label>
+                            <input type="text" class="form-control cargo-pkts-from">
+                        </div>
+                        <div class="form-group">
+                            <label>Packets To</label>
+                            <input type="text" class="form-control cargo-pkts-to">
+                        </div>
+                        <div class="form-group">
+                            <label>Pack UQC</label>
+                            <input type="text" class="form-control cargo-uqc" placeholder="e.g. NOS">
+                        </div>
+                        <div class="form-group">
+                            <label>MCIN/PCIN <span class="required">*</span></label>
+                            <input type="text" class="form-control cargo-pcin" placeholder="PCIN Number" required>
+                        </div>
+                    </div>
+                </div>
+            `;
+            container.insertAdjacentHTML('beforeend', html);
+        }
+
+        function reindexCargo() {
+            const rows = document.getElementById('cargoContainerList').getElementsByClassName('dynamic-item');
+            for (let i = 0; i < rows.length; i++) {
+                rows[i].setAttribute('data-index', i + 1);
+                rows[i].querySelector('.cargo-seq').value = i + 1;
+            }
+        }
+
+        function addSupportingDoc() {
+            const container = document.getElementById('supportingDocList');
+            const currentRows = container.getElementsByClassName('dynamic-item').length;
+            const nextIndex = currentRows + 1;
+
+            const html = `
+                <div class="dynamic-item" data-index="${nextIndex}">
+                    <button type="button" class="remove-btn" onclick="this.parentElement.remove(); reindexDocs();">Remove</button>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Doc Sequence No <span class="required">*</span></label>
+                            <input type="text" class="form-control doc-seq" value="${nextIndex}" readonly required>
+                        </div>
+                        <div class="form-group">
+                            <label>Doc Type Code <span class="required">*</span></label>
+                            <input type="text" class="form-control doc-type" placeholder="e.g. INV / COO" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Doc Reference Number <span class="required">*</span></label>
+                            <input type="text" class="form-control doc-ref" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Beneficiary Code</label>
+                            <input type="text" class="form-control doc-ben-code">
+                        </div>
+                    </div>
+                </div>
+            `;
+            container.insertAdjacentHTML('beforeend', html);
+        }
+
+        function reindexDocs() {
+            const rows = document.getElementById('supportingDocList').getElementsByClassName('dynamic-item');
+            for (let i = 0; i < rows.length; i++) {
+                rows[i].setAttribute('data-index', i + 1);
+                rows[i].querySelector('.doc-seq').value = i + 1;
+            }
+        }
+
+        function generateSCMTRJson() {
+            const form = document.getElementById('stuffingForm');
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
+            // Read header parameters
+            const senderID = document.getElementById('senderID').value;
+            const portOfReporting = document.getElementById('portOfReporting').value;
+            const msgID = document.getElementById('messageType').value;
+            const jobNo = document.getElementById('jobNumber').value;
+            const rawJobDate = document.getElementById('jobDate').value; // YYYY-MM-DD
+            const formattedJobDate = rawJobDate.replace(/-/g, ''); // YYYYMMDD
+            const reportingEvent = document.getElementById('reportingEvent').value;
+
+            // Build hierarchical output payload structure
+            const payload = {
+                headerField: {
+                    senderID: senderID,
+                    receiverID: portOfReporting,
+                    versionNo: "1102",
+                    indicator: "P", 
+                    messageID: msgID,
+                    sequenceOrControlNumber: parseInt(jobNo) || 1003,
+                    date: formattedJobDate,
+                    time: "T" + new Date().toTimeString().substring(0,5),
+                    reportingEvent: reportingEvent
+                },
+                master: {
+                    partyType: document.getElementById('reportingPartyType').value,
+                    custodianCommercialCode: document.getElementById('custodianCode').value,
+                    reportingLocationName: document.getElementById('reportingLocationName').value,
+                    reportingLocationCode: document.getElementById('reportingLocationCode').value,
+                    authorizedPersonPan: document.getElementById('authorisedPersonPan').value
+                },
+                cargoContainer: [
+                    {
+                        equipmentSequenceNo: parseInt(document.getElementById('eqSeqNo').value) || 1,
+                        equipmentId: document.getElementById('containerID').value,
+                        equipmentType: document.getElementById('equipmentType').value,
+                        equipmentSize: document.getElementById('equipmentSize').value,
+                        equipmentLoadStatus: document.getElementById('equipmentLoadStatus').value,
+                        additionalEquipmentHold: document.getElementById('additionalEqHold').value || null,
+                        finalDestinationLocation: document.getElementById('finalDestLocation').value,
+                        eventDate: document.getElementById('eventDate').value,
+                        equipmentSealType: document.getElementById('equipmentSealType').value,
+                        equipmentSealNumber: document.getElementById('equipmentSealNumber').value,
+                        otherEquipmentId: document.getElementById('otherEquipmentID').value || null,
+                        equipmentStatus: document.getElementById('equipmentStatus').value,
+                        equipmentPackage: document.getElementById('equipmentPackage').value || null,
+                        equipmentQuantity: document.getElementById('equipmentQuantity').value ? parseInt(document.getElementById('equipmentQuantity').value) : null,
+                        equipmentUqc: document.getElementById('equipmentUQC').value || null
+                    }
+                ],
+                cargoDocument: [],
+                supportingDocument: []
+            };
+
+            // Parse array nodes for Cargo Entries
+            const cargoRows = document.getElementById('cargoContainerList').getElementsByClassName('dynamic-item');
+            for (let row of cargoRows) {
+                payload.cargoDocument.push({
+                    cargoSequenceNo: parseInt(row.querySelector('.cargo-seq').value),
+                    documentType: row.querySelector('.cargo-doc-type').value,
+                    documentSite: row.querySelector('.cargo-doc-site').value,
+                    documentNumber: row.querySelector('.cargo-doc-num').value,
+                    documentDate: row.querySelector('.cargo-doc-date').value,
+                    shipmentLoadStatus: row.querySelector('.cargo-load-status').value,
+                    packageType: row.querySelector('.cargo-pkg-type').value,
+                    quantity: parseInt(row.querySelector('.cargo-qty').value) || 0,
+                    packetsFrom: row.querySelector('.cargo-pkts-from').value || null,
+                    packetsTo: row.querySelector('.cargo-pkts-to').value || null,
+                    packUqc: row.querySelector('.cargo-uqc').value || null,
+                    mcinPcin: row.querySelector('.cargo-pcin').value
+                });
+            }
+
+            // Parse array nodes for Supporting Docs if any exist
+            const docRows = document.getElementById('supportingDocList').getElementsByClassName('dynamic-item');
+            for (let row of docRows) {
+                payload.supportingDocument.push({
+                    docSequenceNo: parseInt(row.querySelector('.doc-seq').value),
+                    docTypeCode: row.querySelector('.doc-type').value,
+                    docRefNo: row.querySelector('.doc-ref').value,
+                    beneficiaryCode: row.querySelector('.doc-ben-code').value || null,
+                    icegateUserId: senderID
+                });
+            }
+
+            // Standardize ICEGATE Digital Signature Empty Placeholder structure to be appended before DSC validation
+            payload.digSign = {
+                startSignature: "",
+                startCertificate: "",
+                signerVersion: "2.0"
+            };
+
+            // Calculate precise official naming parameter string
+            generatedFilenameStr = `F_${msgID}_${reportingEvent}_${senderID}_${jobNo}_${formattedJobDate}_DEC.json`;
+            
+            // Render inside Dashboard preview screen area
+            generatedJsonData = payload;
+            document.getElementById('generatedFilename').innerText = generatedFilenameStr;
+            document.getElementById('jsonPreview').innerText = JSON.stringify(payload, null, 2);
+            document.getElementById('outputPanel').style.display = 'block';
+            
+            // Scroll preview window cleanly into frame view
+            document.getElementById('outputPanel').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function downloadJSONFile() {
+            if (!generatedJsonData) return;
+            
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(generatedJsonData, null, 2));
+            const downloadAnchorNode = document.createElement('a');
+            downloadAnchorNode.setAttribute("href", dataStr);
+            downloadAnchorNode.setAttribute("download", generatedFilenameStr);
+            document.body.appendChild(downloadAnchorNode);
+            downloadAnchorNode.click();
+            downloadAnchorNode.remove();
+        }
+    </script>
 </body>
 </html>
